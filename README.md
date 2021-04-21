@@ -15,4 +15,15 @@ Cloing Youtube w Vanilla and NodeJS
  [] Video Detail
  [] Edit Video
 
+## git
+### this is second one
+- hi
+  - dsfds
+- hit
+ 
+```
+...
+this is what i meant you know!?
+... 
+```
 

@@ -5,6 +5,7 @@
   "main": "index.js",
   "author": "sj",
   "dependencies": {
+    "@babel/cli": "^7.13.16",
     "@babel/core": "^7.12.10",
     "@babel/node": "^7.12.10",
     "@babel/polyfill": "^7.12.1",
@@ -40,10 +41,15 @@
     "webpack": "^5.23.0"
   },
   "scripts": {
-    "dev:server": "nodemon --exec babel-node init.js --delay 2 '.scss' --ignore 'static' ",
-    "dev:assets": "cross-env WEBPACK_ENV=development webpack -w",
-    "build:assets": "cross-env WEBPACK_ENV=production webpack",
-    "tunnel": "lt --port 4000"
+    "dev:server": "nodemon --exec babel-node src/init.js --delay 2 '.scss' --ignore 'static' ",
+    "dev:assets": "cd src && cross-env WEBPACK_ENV=development && webpack -w",
+    "build:assets": "cd src && cross-env WEBPACK_ENV=production && webpack",
+    "build:server": "babel src --out-dir build --ignore 'src/assets','src/static','src/webpack.config.js'",
+    "copyAll": "xcopy src\\static build\\static /d /e /h /c /y /i && xcopy src\\views build\\views /d /e /h /c /y /i",
+    "build": "npm run build:server && npm run build:assets && npm run copyAll",
+    "prebuild": "rd /s \"build\"",
+    "tunnel": "lt --port 4000",
+    "start": "node build/init.js"
   },
   "devDependencies": {
     "mini-css-extract-plugin": "^1.3.0",
